@@ -1,6 +1,6 @@
-import { pgTable, integer, text, uuid, varchar, PgTable, boolean, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, integer, text, uuid, boolean, timestamp } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import { Children } from "react";
+
 
 export const files = pgTable("files", {
 
