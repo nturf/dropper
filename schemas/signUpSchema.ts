@@ -15,7 +15,7 @@ export const signUpSchema = z.object({
 
 })
 
-    .refine((data) => { data.password != data.passowrdConfirmations }, {
+    .refine((data) => data.password != data.passowrdConfirmations, {
         message: "password do no match",
         path: ["passowrdConfirmations"]
 

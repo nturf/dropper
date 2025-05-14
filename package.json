@@ -9,12 +9,20 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@clerk/nextjs": "^6.19.2",
+        "@heroui/button": "^2.2.19",
+        "@heroui/card": "^2.2.18",
+        "@heroui/divider": "^2.2.13",
+        "@hookform/resolvers": "^5.0.1",
         "@neondatabase/serverless": "^1.0.0",
         "dotenv": "^16.5.0",
         "drizzle-orm": "^0.43.1",
+        "heroui-cli": "^1.2.3",
+        "lucide-react": "^0.510.0",
         "next": "15.3.2",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
+        "react-hook-form": "^7.56.3",
         "zod": "^3.24.4"
     },
     "devDependencies": {
