@@ -14,8 +14,6 @@ import { Mail, Lock, AlertCircle, Eye, EyeOff, CheckCircle, } from "lucide-react
 import Link from "next/link"
 
 export default function SignUpForm() {
-
-
     const router = useRouter()
 
     const [verifying, setVerifying] = useState(false)
