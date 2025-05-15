@@ -5,10 +5,12 @@ import { signUpSchema } from "@/schemas/signUpSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Card, CardBody, CardHeader, CardFooter, Divider } from "@heroui/card"
-import {Divider} from "@heroui/divider";
+import { Card, CardBody, CardHeader, CardFooter } from "@heroui/card"
+import { Divider } from "@heroui/divider";
 import { Button } from "@heroui/button"
-import { Mail, Lock, AlertCircle, Eye, EyeOff } from "lucide-react";
+import { Input } from "@heroui/input";
+
+import { Mail, Lock, AlertCircle, Eye, EyeOff, CheckCircle, } from "lucide-react";
 import Link from "next/link"
 
 export default function SignUpForm() {
@@ -22,6 +24,8 @@ export default function SignUpForm() {
     const [verificationCode, setVerificationCode] = useState("")
     const [verificationError, setVerificationError] = useState<string | null>(null)
     const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
     const { signUp, isLoaded, setActive } = useSignUp()
 
@@ -34,7 +38,7 @@ export default function SignUpForm() {
         defaultValues: {
             email: "",
             password: "",
-            passowrdConfirmations: "",
+            passwordConfirmations: "",
         }
     })
 
@@ -97,11 +101,14 @@ export default function SignUpForm() {
     return (
         <Card className="w-full max-w-md border border-default-200 bg-default-50 shadow-xl">
             <CardHeader className="flex flex-col gap-1 items-center pb-2">
-                <h1 className="text-2xl font-bold text-default-900">Welcome to Dropper</h1>
+                <h1 className="text-2xl font-bold text-default-900">
+                    Create Your Account
+                </h1>
                 <p className="text-default-500 text-center">
-                    sign-in and store your data on cloud in a jiff!!
+                    Dropper- Mangage your files and docs in the cloud securly and hassle free
                 </p>
             </CardHeader>
+
             <Divider />
 
             <CardBody className="py-6">
@@ -115,33 +122,34 @@ export default function SignUpForm() {
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div className="space-y-2">
                         <label
-                            htmlFor="identifier"
+                            htmlFor="email"
                             className="text-sm font-medium text-default-900"
-                        > Email
+                        >
+                            Email
                         </label>
-                        <input
-                            id="identifier"
+                        <Input
+                            id="email"
                             type="email"
                             placeholder="your.email@example.com"
                             startContent={<Mail className="h-4 w-4 text-default-500" />}
-                            isInvalid={!!errors.identifier}
-                            errorMessage={errors.identifier?.message}
+                            isInvalid={!!errors.email}
+                            errorMessage={errors.email?.message}
                             {...register("email")}
                             className="w-full"
                         />
                     </div>
+
                     <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                            <label
-                                htmlFor="password"
-                                className="text-sm font-medium text-default-900"
-                            >Password
-                            </label>
-                        </div>
-                        <input
+                        <label
+                            htmlFor="password"
+                            className="text-sm font-medium text-default-900"
+                        >
+                            Password
+                        </label>
+                        <Input
                             id="password"
                             type={showPassword ? "text" : "password"}
-                            placeholder="**********"
+                            placeholder="••••••••"
                             startContent={<Lock className="h-4 w-4 text-default-500" />}
                             endContent={
                                 <Button
@@ -165,30 +173,75 @@ export default function SignUpForm() {
                         />
                     </div>
 
+                    <div className="space-y-2">
+                        <label
+                            htmlFor="passwordConfirmation"
+                            className="text-sm font-medium text-default-900"
+                        >
+                            Confirm Password
+                        </label>
+                        <Input
+                            id="passwordConfirmation"
+                            type={showConfirmPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            startContent={<Lock className="h-4 w-4 text-default-500" />}
+                            endContent={
+                                <Button
+                                    isIconOnly
+                                    variant="light"
+                                    size="sm"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    type="button"
+                                >
+                                    {showConfirmPassword ? (
+                                        <EyeOff className="h-4 w-4 text-default-500" />
+                                    ) : (
+                                        <Eye className="h-4 w-4 text-default-500" />
+                                    )}
+                                </Button>
+                            }
+                            isInvalid={!!errors.passwordConfirmations}
+                            errorMessage={errors.passwordConfirmations?.message}
+                            {...register("passwordConfirmations")}
+                            className="w-full"
+                        />
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="flex items-start gap-2">
+                            <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                            <p className="text-sm text-default-600">
+                                By signing up, you agree to our Terms of Service and Privacy
+                                Policy
+                            </p>
+                        </div>
+                    </div>
+
                     <Button
                         type="submit"
                         color="primary"
                         className="w-full"
                         isLoading={isSubmitting}
                     >
-                        {isSubmitting ? "Signing in..." : "Sign In"}
+                        {isSubmitting ? "Creating account..." : "Create Account"}
                     </Button>
                 </form>
             </CardBody>
 
             <Divider />
+
             <CardFooter className="flex justify-center py-4">
                 <p className="text-sm text-default-600">
-                    You do not have an account?{" "}
+                    Already have an account?{" "}
                     <Link
-                        href="/sign-up"
+                        href="/sign-in"
                         className="text-primary hover:underline font-medium"
                     >
-                        Sign up
+                        Sign in
                     </Link>
                 </p>
             </CardFooter>
         </Card>
-
-    )
+    );
 }
+

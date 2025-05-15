@@ -9,13 +9,13 @@ export const signUpSchema = z.object({
         .string()
         .min(1, { message: "Password is required" })
         .min(8, { message: "password should be atleast 8 characters" }),
-    passowrdConfirmations: z
+    passwordConfirmations: z
         .string()
         .min(1, { message: "please cofirm your password" })
 
 })
 
-    .refine((data) => data.password != data.passowrdConfirmations, {
+    .refine((data) => data.password != data.passwordConfirmations, {
         message: "password do no match",
         path: ["passowrdConfirmations"]
 
