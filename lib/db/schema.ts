@@ -42,4 +42,4 @@ export const fileRelations = relations(files, ({ one, many }) => ({
 }))
 
 export const File = typeof files.$inferSelect
-export const newFile = typeof files.$inferInsert
+export const NewFile = typeof files.$inferInsert
