@@ -1,3 +1,5 @@
+"use client"
+
 import { useForm } from "react-hook-form"
 import { useSignUp } from "@clerk/nextjs"
 import { z } from "zod"
