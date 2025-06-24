@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Invalid file upload ", status: 401 })
         }
 
-        const fileData = {
+        const fileData: any = {
             name: imagekit.name || "Untitled",
             path: imagekit.filePath || `/droply/${userId}/${imagekit.name}`,
             size: imagekit.size || 0,
